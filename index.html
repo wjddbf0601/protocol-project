@@ -1,311 +1,157 @@
-HTML
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocol Project: Decision & Action</title>
+    <title>Decision & Action</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* 기본 스타일 및 빈티지 필름 톤 색상 정의 */
         :root {
-            --bg-color: #f5f2eb;       /* 빛바랜 웜 크림 */
-            --text-main: #2b2b2b;      /* 깊은 차콜 */
-            --text-sub: #7a756b;       /* 서정적인 네추럴 그레이 */
-            --accent-yes: #4a6b53;     /* 뮤티드 포레스트 그린 (Yes 테마) */
-            --accent-no: #bc6c25;      /* 번트 오렌지/브라운 (No 테마) */
-            --frame-border: #e6e1d5;   /* 사진 프레임 느낌의 외곽선 */
+            --bg-color: #0d0f12;       /* 깊고 깔끔한 다크 배경 */
+            --text-main: #ffffff;      /* 메인 텍스트 화이트 */
+            --text-sub: #777777;       /* 서브 텍스트 그레이 */
+            
+            /* 네(Yes) 테마: 빛나는 네온 그린 */
+            --glow-yes: rgba(74, 222, 128, 0.85);
+            --color-yes: #4ade80;
+            
+            /* 아니오(No) 테마: 빛나는 네온 오렌지 */
+            --glow-no: rgba(251, 146, 60, 0.85);
+            --color-no: #fb923c;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: 'Noto Serif KR', serif;
+            font-family: 'Noto Sans KR', sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            overflow-x: hidden;
-        }
-
-        /* 모바일 최적화 레이아웃 컨테이너 */
-        .container {
-            width: 100%;
-            max-width: 420px;
-            background: #fafaf7;
-            border: 1px solid var(--frame-border);
-            border-radius: 4px;
-            padding: 35px 25px;
-            box-shadow: 0 12px 40px rgba(43, 43, 43, 0.04);
             text-align: center;
-            position: relative;
-        }
-
-        /* 상단 프로젝트 인덱스 라벨 (필름 넘버 스타일) */
-        .project-tag {
-            font-family: 'Courier Prime', monospace;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            color: var(--text-sub);
-            margin-bottom: 30px;
-            text-transform: uppercase;
-        }
-
-        /* 디지털 수베니어 (기념 포스터 뷰 박스) */
-        .souvenir-frame {
-            width: 100%;
-            aspect-ratio: 3 / 4;
-            background-color: #f0ede4;
-            border: 1px solid var(--frame-border);
-            border-radius: 2px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            margin-bottom: 35px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.01);
-            transition: all 0.5s ease;
-        }
-
-        /* 몽환적인 그래픽 배경 오브젝트 */
-        .graphic-blob {
-            position: absolute;
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.35;
-            top: 25%;
-            left: 28%;
-            z-index: 1;
-            transition: all 0.5s ease;
-        }
-
-        .souvenir-title {
-            font-size: 1.8rem;
-            font-weight: 500;
-            line-height: 1.4;
-            margin-top: 40px;
-            z-index: 2;
-            word-break: keep-all;
-        }
-
-        .souvenir-badge {
-            font-family: 'Courier Prime', monospace;
-            font-size: 0.8rem;
-            padding: 6px 14px;
-            border: 1px solid var(--text-main);
-            border-radius: 20px;
-            margin-bottom: 30px;
-            z-index: 2;
-            transition: all 0.3s ease;
-        }
-
-        /* 텍스트 메시지 영역 */
-        .message-section {
-            margin-bottom: 35px;
-        }
-
-        .message-title {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 12px;
-            color: var(--text-main);
-        }
-
-        .message-desc {
-            font-size: 0.88rem;
-            line-height: 1.6;
-            color: var(--text-sub);
-            word-break: keep-all;
-        }
-
-        /* 실시간 통계 디스플레이 */
-        .counter-box {
-            border-top: 1px dashed var(--frame-border);
-            padding-top: 25px;
-        }
-
-        .counter-label {
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .counter-number {
-            font-family: 'Courier Prime', monospace;
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: var(--text-main);
-            margin-bottom: 15px;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-
-        /* 통계 인디케이터 바 */
-        .bar-container {
-            width: 100%;
-            height: 4px;
-            background-color: #ededed;
-            border-radius: 2px;
             overflow: hidden;
         }
 
-        .bar-fill {
-            height: 100%;
-            width: 50%;
-            background-color: var(--text-sub);
-            border-radius: 2px;
-            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        /* 메인 콘텐츠 영역 중앙 정렬 */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            margin-bottom: 60px; /* 하단 문구와의 간격 */
         }
 
-        /* 에러 발생 시 처리 */
-        .error-message {
+        .title-kr {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .title-en {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            font-weight: 300;
+            margin-bottom: 45px;
+            letter-spacing: 0.5px;
+        }
+
+        /* 숫자 카운터 스타일 (아주 굵고 거대하게) */
+        .counter-number {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            transition: all 0.5s ease;
+        }
+
+        /* 자바스크립트에서 선택에 따라 부여될 빛나는(Glow) 효과 클래스 */
+        .glow-yes {
+            color: var(--color-yes);
+            text-shadow: 0 0 20px var(--glow-yes), 0 0 50px var(--glow-yes);
+        }
+
+        .glow-no {
+            color: var(--color-no);
+            text-shadow: 0 0 20px var(--glow-no), 0 0 50px var(--glow-no);
+        }
+
+        /* 하단 응원 메시지 영역 */
+        .footer-message {
+            position: absolute;
+            bottom: 40px;
             font-size: 0.95rem;
+            font-weight: 300;
             color: var(--text-sub);
             line-height: 1.6;
+            letter-spacing: -0.3px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="project-tag" id="projectTag">Protocol DS1(B) // P4</div>
+    <div class="main-container">
+        <h1 class="title-kr">나와 같은 선택을 한 사람들</h1>
+        <p class="title-en">People who made the same choice as you</p>
         
-        <div id="contentWrapper">
-            <div class="souvenir-frame">
-                <div class="graphic-blob" id="blob"></div>
-                <h1 class="souvenir-title" id="souvenirTitle">Loading...</h1>
-                <div class="souvenir-badge" id="souvenirBadge">00</div>
-            </div>
+        <div class="counter-number" id="counterNum">--명</div>
+    </div>
 
-            <div class="message-section">
-                <h2 class="message-title" id="msgTitle">선택의 기록</h2>
-                <p class="message-desc" id="msgDesc">동선을 따라 발걸음을 옮긴 당신의 실제 행동이 기록되었습니다.</p>
-            </div>
-
-            <div class="counter-box">
-                <p class="counter-label">현재까지 나와 같은 선택을 한 보행자 수</p>
-                <div class="counter-number" id="counterNum">--</div>
-                <div class="bar-container">
-                    <div class="bar-fill" id="barFill"></div>
-                </div>
-            </div>
-        </div>
+    <div class="footer-message">
+        한 학기 동안 정말 수고 많으셨습니다.<br>당신의 앞으로의 길을 언제나 응원합니다.
     </div>
 
     <script>
-        // 1. URL 파라미터 분석 (?choice=yes 또는 ?choice=no)
         const urlParams = new URLSearchParams(window.location.search);
         const choice = urlParams.get('choice');
-
-        // DOM 요소 가져오기
-        const blob = document.getElementById('blob');
-        const souvenirTitle = document.getElementById('souvenirTitle');
-        const souvenirBadge = document.getElementById('souvenirBadge');
-        const msgTitle = document.getElementById('msgTitle');
-        const msgDesc = document.getElementById('msgDesc');
         const counterNum = document.getElementById('counterNum');
-        const barFill = document.getElementById('barFill');
-        const projectTag = document.getElementById('projectTag');
 
-        // 2. 투표수 누적 시스템 시뮬레이션 (GitHub Pages 맞춤형 로직)
-        // 새로고침할 때마다 무한 증식을 막고 실제 데이터 감성을 주기 위해 기본 시드값 설정
-        const BASE_YES = 142;
-        const BASE_NO = 89;
+        // 기본 시작 숫자 (너무 0명부터 시작하면 썰렁할 수 있으니 임의로 설정. 원하면 0으로 변경 가능)
+        const BASE_YES = 12;
+        const BASE_NO = 8;
 
-        function getAccumulatedVotes(type) {
+        // 4. 접속할 때마다 숫자가 매번 늘어나도록 처리하는 함수
+        function updateAndGetVotes(type) {
             const storageKey = `protocol_votes_${type}`;
             let currentVotes = localStorage.getItem(storageKey);
             
             if (!currentVotes) {
-                // 초기 방문 시 기본 베이스 값 세팅
+                // 처음 접속 시 기본값 셋팅
                 currentVotes = type === 'yes' ? BASE_YES : BASE_NO;
             } else {
+                // 기존 데이터가 있으면 숫자로 변환
                 currentVotes = parseInt(currentVotes);
             }
 
-            // 세션 내 중복 카운트 방지용 플래그 체크
-            const hasVoted = sessionStorage.getItem('hasVotedThisSession');
-            if (!hasVoted) {
-                currentVotes += 1;
-                localStorage.setItem(storageKey, currentVotes);
-                sessionStorage.setItem('hasVotedThisSession', 'true');
-            }
+            // ★ QR 코드를 찍고 이 페이지가 열릴 때마다 무조건 1씩 추가 (요청하신 기능)
+            currentVotes += 1;
+            localStorage.setItem(storageKey, currentVotes);
 
             return currentVotes;
         }
 
-        // 3. 선택에 따른 동적 감성 테마 반영
+        // URL 파라미터(?choice=yes 또는 ?choice=no)에 따라 색상/숫자 출력
         if (choice === 'yes') {
-            const yesVotes = getAccumulatedVotes('yes');
-            const noVotes = localStorage.getItem('protocol_votes_no') ? parseInt(localStorage.getItem('protocol_votes_no')) : BASE_NO;
-            const percentage = Math.round((yesVotes / (yesVotes + noVotes)) * 100);
-
-            // 테마 적용 (Yes: 포레스트 그린)
-            document.documentElement.style.setProperty('--text-main', 'var(--accent-yes)');
-            blob.style.backgroundColor = 'var(--accent-yes)';
-            
-            // 콘텐츠 업데이트
-            souvenirTitle.innerText = "“기꺼이 연결을 선택한 당신에게”";
-            souvenirBadge.innerText = "COLLECTED // TYPE_Y";
-            souvenirBadge.style.borderColor = 'var(--accent-yes)';
-            
-            msgTitle.innerText = "행동과 결정의 일치";
-            msgDesc.innerText = "당신은 머릿속의 확신을 실제 신체적 발걸음으로 증명해 냈습니다. 이 화면은 오직 'Yes'의 경로를 완주한 사람에게만 주어지는 디지털 수베니어입니다.";
-            
-            // 카운터 애니메이션 효과
-            setTimeout(() => {
-                counterNum.innerText = `${yesVotes}명`;
-                barFill.style.backgroundColor = 'var(--accent-yes)';
-                barFill.style.width = `${percentage}%`;
-            }, 300);
-
+            const votes = updateAndGetVotes('yes');
+            counterNum.innerText = `${votes}명`;
+            counterNum.classList.add('glow-yes'); // 네온 그린 글로우 효과
         } else if (choice === 'no') {
-            const noVotes = getAccumulatedVotes('no');
-            const yesVotes = localStorage.getItem('protocol_votes_yes') ? parseInt(localStorage.getItem('protocol_votes_yes')) : BASE_YES;
-            const percentage = Math.round((noVotes / (yesVotes + noVotes)) * 100);
-
-            // 테마 적용 (No: 번트 오렌지)
-            document.documentElement.style.setProperty('--text-main', 'var(--accent-no)');
-            blob.style.backgroundColor = 'var(--accent-no)';
-            
-            // 콘텐츠 업데이트
-            souvenirTitle.innerText = "“안전을 선택한 당신에게”";
-            souvenirBadge.innerText = "COLLECTED // TYPE_N";
-            souvenirBadge.style.borderColor = 'var(--accent-no)';
-            
-            msgTitle.innerText = "타협 없는 경계선";
-            msgDesc.innerText = "무언가를 포기하기보다 온전한 나를 지키는 쪽을 선택하셨군요. 평탄하고 익숙한 길의 끝에서, 당신이 보여준 선택의 무게를 기록합니다.";
-            
-            // 카운터 애니메이션 효과
-            setTimeout(() => {
-                counterNum.innerText = `${noVotes}명`;
-                barFill.style.backgroundColor = 'var(--accent-no)';
-                barFill.style.width = `${percentage}%`;
-            }, 300);
-
+            const votes = updateAndGetVotes('no');
+            counterNum.innerText = `${votes}명`;
+            counterNum.classList.add('glow-no'); // 네온 오렌지 글로우 효과
         } else {
-            // 잘못된 접근이거나 파라미터가 없을 때 (기본 메인 안내 화면)
-            document.getElementById('contentWrapper').innerHTML = `
-                <div class="error-message">
-                    <p style="font-family: 'Courier Prime', monospace; margin-bottom: 15px; font-size: 1.2rem;">[ PROTOCOL ERROR ]</p>
-                    <p>올바르지 않은 경로의 접근입니다.<br>스포츠 콤플렉스 앞 바닥에 마련된 특정 선택지(Y / N)의 QR 코드를 통해 올바르게 걸어 들어와 주세요.</p>
-                </div>
-            `;
+            // 주소를 잘못 치고 들어온 경우
+            counterNum.innerText = "ERROR";
+            counterNum.style.fontSize = "2rem";
+            counterNum.style.color = "red";
+            counterNum.style.textShadow = "none";
         }
     </script>
 </body>
