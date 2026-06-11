@@ -31,14 +31,12 @@
             gap: 30px; 
         }
 
-        /* 🖼️ 3장 사진 갤러리 레이아웃 */
         .photo-gallery {
             display: flex;
             flex-direction: column;
-            gap: 10px; /* 사진들 사이의 위아래 간격 */
+            gap: 10px;
         }
 
-        /* 첫 번째 큰 사진 */
         .photo-main {
             width: 100%;
             border-radius: 8px;
@@ -46,22 +44,19 @@
             object-fit: cover;
         }
 
-        /* 2, 3번째 사진을 나란히 담는 컨테이너 */
         .photo-sub-container {
             display: flex;
-            gap: 10px; /* 두 사진 사이의 좌우 간격 */
+            gap: 10px;
         }
 
-        /* 2, 3번째 작은 사진 */
         .photo-sub {
-            width: calc(50% - 5px); /* 전체의 절반 크기에서 간격을 뺀 만큼 */
+            width: calc(50% - 5px);
             border-radius: 8px;
             border: 1px solid #333;
             object-fit: cover;
-            aspect-ratio: 1 / 1; /* 정사각형 비율로 깔끔하게 맞춤 */
+            aspect-ratio: 1 / 1;
         }
 
-        /* 📝 텍스트 영역 디자인 */
         .desc-en {
             font-size: 0.85rem;
             line-height: 1.6;
