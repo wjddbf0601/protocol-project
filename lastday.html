@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decision & Action - Protocol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0f12;
+            --text-main: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .site-photo {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #222;
+        }
+
+        .desc-en {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #dddddd;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .desc-kr {
+            font-size: 0.75rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="photo1.jpg" class="site-photo" alt="Project Site" onerror="this.style.display='none'">
+        <img src="photo2.jpg" class="site-photo" alt="Project Site" onerror="this.style.display='none'">
+
+        <div>
+            <p class="desc-en">
+                No matter what thoughts run through people's minds on this path, their footsteps always lead them down the most comfortable straight line. To break this familiar pattern, we presented forks in the road on the floor and allowed people to verify their choices through real-time results. Consequently, people willingly changed their habitual paths to carry out their choices, and just like the accumulated numbers you are seeing now, their actual footsteps came together to complete a new collection of movements in this space.
+            </p>
+            <p class="desc-kr">
+                사람들은 이 길에서 마음속으로 어떤 생각을 하든 발걸음은 늘 가장 편한 직선을 향합니다. 이 익숙한 패턴을 깨기 위해 바닥에 선택의 갈림길을 제시하고, 자신의 선택을 실시간 결과물을 통해 확인받도록 했습니다. 결과적으로 사람들은 선택을 이행하기 위해 기꺼이 관성적인 동선을 바꿨고, 지금 당신이 보고 있는 누적된 숫자처럼 사람들의 실제 발걸음이 모여 이 공간의 새로운 움직임의 집합을 완성해 냈습니다.
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
